@@ -1,32 +1,32 @@
-<img height="70px" src="https://raw.githubusercontent.com/Radon-Games/Radon-Games/main/src/assets/banner.svg"></img>
+# SolidStart
 
-An open-source unblocked games website built with simplicity in mind.
+Everything you need to build a Solid project, powered by [`solid-start`](https://github.com/ryansolid/solid-start/tree/master/packages/solid-start);
 
-## Setup
-```
-git clone https://github.com/Radon-Games/Radon-Games
-cd Radon-Games
-npm install
-npm run build
-npm start
-```
+## Creating a project
 
-## Configuration
+```bash
+# create a new project in the current directory
+npm init solid@next
 
-There are a coupple of ways that you can change configuration values. The first of those ways is changing values within `config.mjs`, this is the easiest way to change values. The second way is to use the coressponding environment variables. Both ways do the same thing but have their own use cases.
-
-`config.mjs`
-```js
-import "dotenv/config";
-
-export default {
-  ip: process.env.IP, // IP of the server
-  port: process.env.PORT || 8080 // Port of the server
-}
+# create a new project in my-app
+npm init solid@next my-app
 ```
 
-`.env`
+> Note: the `@next` is temporary
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
-IP=127.0.0.1
-PORT=80
-```
+
+## Building
+
+Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
+
+By default, `npm run build` will generate a Node app that you can run with `node build`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
