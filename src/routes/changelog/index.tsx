@@ -1,12 +1,12 @@
 import { For, Show } from "solid-js";
 import { versions } from "../../../Changes";
 import { version as currentVersion } from "../../../package.json";
-import GetTitle from "../../Title";
+import UpdateTab from "../../Tab";
 import { onMount } from "solid-js";
 
 export default function Changelog () {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
 
   return (

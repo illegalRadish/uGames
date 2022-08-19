@@ -2,12 +2,12 @@ import { For, Show } from "solid-js";
 import NotFound from "../[...404]";
 import { versions } from "../../../Changes";
 import { useLocation } from "@solidjs/router";
-import GetTitle from "../../Title";
+import UpdateTab from "../../Tab";
 import { onMount } from "solid-js";
 
 export default function Version (props) {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
 
   let path;

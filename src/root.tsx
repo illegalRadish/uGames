@@ -39,6 +39,7 @@ export default function Root() {
         <Meta property="og:description" content="An open-source unblocked games website built with simplicity in mind."/>
         <Meta name="keywords" content="radon,games,radon games,unblocked,unblocked games,html games,html5 games,flash games,flashplayer games,proxy,io"/>
 
+        <script src="/index.js"></script>
         <script src="/pro.fontawesome.js" defer></script>
         <script src="https://unpkg.com/@ruffle-rs/ruffle" defer></script>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8517735295733237"

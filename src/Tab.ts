@@ -1,5 +1,6 @@
 import { useLocation } from "@solidjs/router";
 import { allGames } from "../Games";
+import { defaultSettings } from "./routes/Settings";
 
 const titles = {
   "/": () => "Radon Games",
@@ -28,5 +29,27 @@ export default function () {
       title = titles[key]();
     }
   });
-  return title;
+  let settings;
+  try {
+    settings = JSON.parse(localStorage.getItem("settings")) || defaultSettings;
+  } catch {
+    settings = defaultSettings;
+  }
+  if (settings["tab-cloak"]) {
+    if (settings["tab-cloak-mode"] === "hidden") {
+      document.addEventListener("visibilitychange", ()  => {
+        if (document.hidden) {
+          document.title = settings["tab-cloak-text"];
+          (document.querySelector("link[rel='icon']") as HTMLLinkElement).href = settings["tab-cloak-icon"];
+        } else {
+          document.title = title;
+          (document.querySelector("link[rel='icon']") as HTMLLinkElement).href = "/favicon.ico";
+        }
+      });
+    } else if (settings["tab-cloak-mode"] === "always") {
+      document.title = settings["tab-cloak-text"];
+      (document.querySelector("link[rel='icon']") as HTMLLinkElement).href = settings["tab-cloak-icon"];
+    }
+  }
 }
+

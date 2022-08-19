@@ -1,10 +1,10 @@
 import Icon from "../components/Icon";
-import GetTitle from "../Title";
+import UpdateTab from "../Tab";
 import { onMount } from "solid-js";
 
 export default function NotFound() {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
 
   return (

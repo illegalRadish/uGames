@@ -2,12 +2,12 @@ import Nebula from "../assets/nebula.png";
 import UBG100 from "../assets/ubg100.png";
 import GameHub from "../assets/gamehub.png";
 import Astral from "../assets/astral.png";
-import GetTitle from "../Title";
+import UpdateTab from "../Tab";
 import { onMount } from "solid-js";
 
 export default function Partners () {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
 
   return (

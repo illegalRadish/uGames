@@ -4,14 +4,14 @@ import { featured } from "../../Games";
 import "../../node_modules/solid-slider/dist/slider.css";
 import { createSlider } from "solid-slider";
 import { onMount } from "solid-js";
-import GetTitle from "../Title";
+import UpdateTab from "../Tab";
 
 export default function Index () {
   const [ slider, { current, next, prev, moveTo } ] = createSlider();
   let oldCurrent = 0;
 
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
     setInterval(() => {
       if (oldCurrent !== current()) {
         oldCurrent = current();

@@ -1,11 +1,11 @@
 import { For } from 'solid-js';
 import { listedGames } from "../../Games";
-import GetTitle from "../Title";
+import UpdateTab from "../Tab";
 import { onMount } from "solid-js";
 
 export default function Games () {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
   
   let keys = Object.keys(sortGames(listedGames));

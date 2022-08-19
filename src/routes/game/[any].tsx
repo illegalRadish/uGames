@@ -2,7 +2,7 @@ import NotFound from "../[...404]";
 import { allGames } from "../../../Games";
 import { useLocation } from "@solidjs/router";
 import { onMount } from "solid-js";
-import GetTitle from "../../Title";
+import UpdateTab from "../../Tab";
 
 declare global {
   interface Window {
@@ -16,7 +16,7 @@ declare global {
 
 export default function Game (props) {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
 
   let game;
@@ -31,17 +31,28 @@ export default function Game (props) {
     return <NotFound />;
   }
 
+  function fullscreen () {
+    const game = document.getElementById("gameContainer").children[0] as HTMLElement;
+    game.requestFullscreen();
+  }
+
   return (
-    <div class="bg-gray-900 text-gray-100">
-      <h1 class="text-2xl text-center py-10">{ game.title }</h1>
-      <div class="bg-gray-800 block mx-auto mb-10" style={ `width:${ game.width };` }>
-        <div style={ `height:${ game.height };` }>
-          <GameElement game={ game }/>
+    <>
+      <div class="flex justify-center w-full pb-16 text-gray-100">
+        <div class="bg-gray-800 m-3 w-[300px] sm:w-[616px] md:w-[744px] lg:w-[1000px]">
+          <div id="gameContainer" class="sm:w-[616px] sm:h-[347px] md:w-[744px] md:h-[419px] lg:w-[1000px] lg:h-[563px]">
+            <GameElement game={ game }/>
+          </div>
+          <div class="p-2">
+            <div class="float-right text-2xl m-1">
+              <i class="fa-light fa-expand-wide" onclick={fullscreen}></i>
+            </div>
+            <h1 class="text-2xl m-2">{ game.title }</h1>
+            <p class="text-base m-2 select-none">{ game.description }</p>
+          </div>
         </div>
-        <h1 class="text-xl p-3 pb-0">Description</h1>
-        <p class="p-3">{ game.description }</p>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -61,16 +72,16 @@ function GameElement (props) {
   const { game } = props;
 
   if (game.gameType === "flash") {
-    return <embed src={ `/cdn${ game.source }` }  width={ game.width } height={ game.height }></embed>
+    return <embed id="game" src={ `/cdn${ game.source }` } class="w-full h-full"></embed>
   } else if (game.gameType === "html") {
-    return <iframe src={ `/cdn${game.source}` } width={ game.width } height={ game.height }></iframe>
+    return <iframe id="game" src={ `/cdn${game.source}` } class="w-full h-full border-0"></iframe>
   } else if (game.gameType === "proxy") {
-    return <iframe src={ "/~/" + xor.encode(game.source) } width={ game.width } height={ game.height }></iframe>
+    return <iframe id="game" src={ "/~/" + xor.encode(game.source) } class="w-full h-full"></iframe>
   } else {
     onMount(() => {
-      document.title = GetTitle();
+      UpdateTab();
       window.EJS_player = "#game";
-      window.EJS_gameUrl = `${ game.source }`;
+      window.EJS_gameUrl = `/cdn${ game.source }`;
       window.EJS_core = game.gameType;
       window.EJS_gameName = game.title;
       window.EJS_pathtodata = "/cdn/data/";

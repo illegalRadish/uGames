@@ -1,11 +1,11 @@
-import GetTitle from "../Title";
+import UpdateTab from "../Tab";
 import { onMount } from "solid-js";
 
 declare var __uv$config: any;
 
 export default function Apps () {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
 
   function redirect (url) {

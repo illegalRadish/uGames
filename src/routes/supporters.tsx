@@ -1,9 +1,9 @@
-import GetTitle from "../Title";
+import UpdateTab from "../Tab";
 import { onMount } from "solid-js";
 
 export default function Supporters () {
   onMount(() => {
-    document.title = GetTitle();
+    UpdateTab();
   });
   return (
     <div class="bg-gray-900 text-gray-100">
